@@ -1,0 +1,615 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Basics of Programming I -- Python Workshops}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{basics-of-programming-i}{%
+\section{Basics of Programming I}\label{basics-of-programming-i}}
+
+    \hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+    Throughout these workshops we are going to be teaching you about
+programming using a language known as \textbf{Python}. Python is a
+really powerful language, and it is very versatile. We are going to be
+utilising an application known as \textbf{Jupyter Notebooks} which
+allows us to create and share documents with code easily and in a
+presentable visual format.
+
+    Learning how to program is just like learning a real language. The only
+way you can learn is by \emph{doing}, and it is really important to
+understand that you will not learn anything unless you activley try and
+get involved in the examples we present. You will not become an expert
+in Python by the end of these workshops, but you will become more
+literate, and in the same way that people who can speak Italian can
+understand parts of Spanish these workshops will help your overall
+ability to program and work with data in a coherent, efficient manner.
+
+    \hypertarget{why-should-you-be-here-and-why-should-you-stay}{%
+\subsection{Why should you be here? (and why should you
+stay?)}\label{why-should-you-be-here-and-why-should-you-stay}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Become more programming literate}: This is invaluable for your
+  honours theses or any research project you may have to do
+\item
+  \emph{Your Resume}: Employers are becoming increasingly interested in
+  graduates who are able to program or at least familiar with it.
+\end{enumerate}
+
+    \hypertarget{the-goal-of-this-program}{%
+\subsection{The goal of this program}\label{the-goal-of-this-program}}
+
+The goal of these workshops is to allow students to introduce students
+to the fundamentals of programming. This is important because these
+skills not only make students more employable, but are also essential
+for any type of empirical work in Economics. This course endeavours to
+be accessible to \emph{all students} regardless of background and/or
+skill. Core to what we are trying to achieve is increase the level of
+`programming literacy' amongst students. We must emphasise that this
+program is \textbf{not compulsory} and we cannot be responsible for your
+assignments or for anything related to the units you are enrolled in.
+
+    \hypertarget{what-is-python-and-jupyter-notebooks}{%
+\subsection{What is Python and Jupyter
+Notebooks}\label{what-is-python-and-jupyter-notebooks}}
+
+Python is a programming language, meaning that we can use it to make our
+computer conduct calculations or manipulate data. Most of the tutorials
+you will find on the internet might seem really confusing, a lot of them
+will ask you to use the terminal or some editor such as Atom. That's
+where Jupyter Notebooks comes in. Essentially, Jupyter Notebooks are a
+program that allows us to write and run Python code in an envirionment
+which is much more user friendly and which requires less background
+knowledge.
+
+\hypertarget{accessing-jupyter-notebooks-fill-in-either-ann}{%
+\subsection{Accessing Jupyter Notebooks --- fill in, either
+ann}\label{accessing-jupyter-notebooks-fill-in-either-ann}}
+
+\hypertarget{working-directories}{%
+\subsection{Working Directories}\label{working-directories}}
+
+When we are working with any programming language, indeed any program
+that requires us to read or save data we need to have some understanding
+about what a `working directory' is. You can think of a working
+directory as the location from which your program (in our case, Jupyter
+Notebooks) operates from. If I want to read data for example, it either
+needs to be in my working directory or I need to specify the path of the
+file. We will see an example of this below. This can be a little
+confusing at first, but for example my home directory is
+\texttt{/Users/varunsatish}. Your working directory can be changed for
+example to \texttt{/Users/varunsatish/Python\_Workshops}, however for
+the moment this isn't too important it's just something you might need
+to keep in mind for later on.
+
+\hypertarget{packages}{%
+\subsection{Packages}\label{packages}}
+
+Packages are an important part of the Python programming language. You
+can think of packages as `add ons' to the language. Some of these
+packages are really the basis of a lot that you will do in the
+programming language. A couple of examples are the Numpy and Pandas
+packages, which we will see a little later. Generally, the syntax for
+importing packages looks
+like:\texttt{import\ {[}package{]}\ as\ {[}convenient\ name{]}}. For
+example, \texttt{import\ pandas\ as\ pd} or
+\texttt{import\ numpy\ as\ np}. If you look online there are names under
+which packages are imported almost universally.
+
+\hypertarget{troubleshooting}{%
+\subsection{Troubleshooting}\label{troubleshooting}}
+
+The two best troubleshooters anyone who needs to program has in their
+arsenal are Google and Youtube. If you come across a problem, there has
+almost definitely been someone who has made a tutorial about it, or a
+forum post with a solved solution to the problem -- you just need to
+understand what the question you are asking actually is. Part of this
+comes with programming literacy, in all seriousness when it comes to
+learning how to code, the best thing you can do is make sure you have
+enough understanding not to write code automatically, but so that you
+actually can ask the right questions when you inevitably stumble across
+problems.
+
+    \hypertarget{data-types-and-data-structures}{%
+\subsection{1.1 Data Types and Data
+Structures}\label{data-types-and-data-structures}}
+
+    \hypertarget{what-is-a-variable}{%
+\subsection{What is a variable?}\label{what-is-a-variable}}
+
+In programming, a variable is an object that we use to write code.
+Variables store information, and we can change what information these
+variables hold. We can assign names to variables, which makes life a lot
+easier when we are writing complicated code.
+
+For example, all of you should be familar with variables from your
+Econometrics classes. Suppose I observe an individual and I am
+interested in their age, perhaps I want to do some calculations relating
+to their age. Well, I can define a variable named \texttt{age}, and I
+can assign some value to it.
+
+In very very simple terms, a variable is an object we use to `remember
+stuff', whether that be the output of some calculation, or simply a name
+that is more convenient.
+
+    \begin{figure}
+\centering
+\includegraphics{https://github.com/varunsatish/Coding-Tutorials/blob/master/images/variable_diagram.jpg?raw=true}
+\caption{Variable}
+\end{figure}
+
+    Suppose I want to do some calculations based around the ages of a group
+of people, I can make use of variables to make that much easier
+
+    \begin{figure}
+\centering
+\includegraphics{https://github.com/varunsatish/Coding-Tutorials/blob/master/images/1_1_ppl_diagram.jpg?raw=true}
+\caption{People}
+\end{figure}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{pat} \PY{o}{=} \PY{l+m+mi}{21}
+        \PY{n}{lea} \PY{o}{=} \PY{l+m+mi}{16}
+        \PY{n}{tommy} \PY{o}{=} \PY{l+m+mi}{48}
+        \PY{n}{varun} \PY{o}{=} \PY{l+m+mi}{22}
+        \PY{n}{chris} \PY{o}{=} \PY{l+m+mi}{28}
+\end{Verbatim}
+
+
+    I can `run' a block of code by using: shift+enter. This will execute the
+code contained within that block
+
+    \hypertarget{some-common-errors}{%
+\subsubsection{Some common errors:}\label{some-common-errors}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Using capital letters
+\item
+  Spaces
+\item
+  Numbers
+\end{enumerate}
+
+    \hypertarget{numbers-floats-and-integers}{%
+\subsection{Numbers: Floats and
+Integers}\label{numbers-floats-and-integers}}
+
+The data type we have just been referring to are known as Integers.
+These are one of the most fundamental data types in Python. Integers are
+just whole numbers. In Python, as with in many other languages, we are
+able to assign values to variables that we define, and we can perform
+mathematical operations on or using them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{total\PYZus{}age} \PY{o}{=} \PY{n}{pat} \PY{o}{+} \PY{n}{lea} \PY{o}{+} \PY{n}{tommy} \PY{o}{+} \PY{n}{varun} \PY{c+c1}{\PYZsh{}summing up ages}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{total\PYZus{}age}\PY{p}{)} \PY{c+c1}{\PYZsh{}printing ages}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+107
+
+    \end{Verbatim}
+
+    \textbf{\emph{NOTE:}} It is really important that you remember to
+`comment' on your code. In Python, you can use \texttt{\#} before
+something you type in order to write a section of code that does not
+`run' when you run the code block. If you don't comment you will have
+absolutely no idea what you were talking about when you go back and
+check your code -- especially when your code gets complicated.
+
+    As we can see, we don't need to keep defining new variables, once we
+have defined a variable it has been `remembered'. Now, unlike other
+programs that you may have used, for example STATA; there is no easy to
+use GUI to track which variables have been created and so forth,
+sometimes you can define a variable, delete the code, and if you haven't
+restarted the kernel, the computer will still remember it.
+
+    \hypertarget{words-strings}{%
+\subsection{Words: Strings}\label{words-strings}}
+
+Strings are an object that are \emph{generally} used to represent text
+information. In the same way that we can assign an integer to a variable
+\texttt{x}, we can do the same with strings. When we are working with
+strings, it is important to remember to use the quotation marks
+\texttt{\textquotesingle{}} or \texttt{"}. I can create collections of
+say names using strings, for example I may interested in the names of
+some students in a class.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{ECMT\PYZus{}3160} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tommy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Varun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{ECMT\PYZus{}3160}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Tommy', 'Pat', 'Lea', 'Varun']
+
+    \end{Verbatim}
+
+    Strings are \textbf{NOT} treated the same way as integers. For example,
+\texttt{apple\ =\ 5} is treated differently to
+\texttt{apple\ =\ \textquotesingle{}5\textquotesingle{}}, we
+\textbf{cannot perform} numerical calculations using strings.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{z} \PY{o}{=} \PY{n}{x}\PY{o}{/}\PY{n}{y}
+         
+         \PY{n+nb}{type}\PY{p}{(}\PY{n}{z}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} float
+\end{Verbatim}
+            
+    Essentially any time we are using text data, we are working with
+strings. If there are problems with computation, sometimes the first
+place you can look is by checking the \texttt{type()} of the data. For
+example, if \texttt{type(z)\ =\ str} we cannot do any computation with
+\texttt{z}.
+
+    Notice that what we have actually done is created a collection of
+objects. These collections are known as `lists' and they are very
+important because they allow us to keep variables together. Python
+doesn't (usually) have any notion of a `vector', so for those of you who
+have some background in programming or Linear Algebra, sometimes when
+you need to do some computation, you can think of lists of integers as
+sort of like vectors.
+
+    \hypertarget{collections-of-objects-lists}{%
+\subsection{Collections of objects:
+Lists}\label{collections-of-objects-lists}}
+
+    \begin{figure}
+\centering
+\includegraphics{https://github.com/varunsatish/Coding-Tutorials/blob/master/images/lists.jpg?raw=true}
+\caption{People}
+\end{figure}
+
+    A `list' is a collection of arbitrary objects, we define a list using
+the square brackets:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{ECMT\PYZus{}3160} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tommy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lea}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Varun}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{c+c1}{\PYZsh{}usually I wouldn\PYZsq{}t have to redefine this variable, I just have for clarity}
+\end{Verbatim}
+
+
+    We can perform functions on lists, for example we may be interested in
+how many elements are within the list, or we may be interested in a
+specfic object within the list. These are very basic examples and there
+are far more functions, but for now these will do.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n+nb}{len}\PY{p}{(}\PY{n}{ECMT\PYZus{}3160}\PY{p}{)} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 4
+\end{Verbatim}
+            
+    We can also \textbf{`index'} lists, meaning that we can refer to
+specific elements within them by reffering to the numerical order. This
+is extremley important later on when we talk about functions and loops.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{ECMT\PYZus{}3160}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{}Python indexing begins at 0!}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 'Tommy'
+\end{Verbatim}
+            
+    We have all come across indexing before. For example, if we have a
+random variable \(x\), we can refer to the \(i^{th}\) observation with
+\(x_i\) i.e the first observation is \(x_1\), the second is \(x_2\) and
+so forth.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{}Exercise 1.1 solution}
+        
+        \PY{n}{x} \PY{o}{=} \PY{l+m+mi}{1}
+        
+        \PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+        
+        \PY{n}{x} \PY{o}{+} \PY{l+m+mi}{3} 
+        \PY{n}{y} \PY{o}{+} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
