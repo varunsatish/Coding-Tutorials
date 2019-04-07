@@ -1,0 +1,8 @@
+Name,Type 1,Type 2,Total,HP,Attack,Defense,Sp. Atk,Sp. Def,Speed,Generation,Legendary
+Kadabra,Psychic,,400,40,35,30,120,70,105,1,False
+Voltorb,Electric,,330,40,30,50,55,55,100,1,False
+Minun,Electric,,405,60,40,50,75,85,95,3,False
+Luvdisc,Water,,330,43,30,55,40,65,97,3,False
+Pachirisu,Electric,,405,60,45,70,45,90,95,4,False
+MeowsticMale,Psychic,,466,74,48,76,83,81,104,6,False
+MeowsticFemale,Psychic,,466,74,48,76,83,81,104,6,False
